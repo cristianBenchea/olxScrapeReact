@@ -1,21 +1,21 @@
 import './Anunt.css';
 
-function Anunt({title, price, thumbnail, link, yearAndKm, locationAndDate}) {
+function Anunt({ detaliiAnunt }) {
   
   return (
     <div className='flex'>
       <div className='thumbnail'>
-        <img src={thumbnail} alt={title} className='w-60 h-48 object-cover'/>
+        <img src={detaliiAnunt.thumbnail} alt={detaliiAnunt.title} className='w-60 h-48 object-cover'/>
       </div>
       <div className='ml-10'>
         <div className='detaliiZ'>
-          <h3><a href={link} target='_blank' rel="noreferrer">{title}</a></h3>
+          <h3><a href={detaliiAnunt.link} target='_blank' rel="noreferrer">{detaliiAnunt.title}</a></h3>
           <div>
-            <p>{locationAndDate}</p>
-            <p>{yearAndKm}</p>
+            <p>{detaliiAnunt.locationAndDate}</p>
+            <p>{detaliiAnunt.yearAndKm}</p>
           </div>
           <div>
-            <h5>{price}</h5>
+            <h5>{detaliiAnunt.price}</h5>
           </div>
         </div>
       </div>
