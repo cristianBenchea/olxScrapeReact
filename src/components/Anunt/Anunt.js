@@ -9,7 +9,7 @@ function Anunt({ detaliiAnunt }) {
       </div>
       <div className='ml-10'>
         <div className='detaliiZ'>
-          <h3><a href={detaliiAnunt.link} target='_blank' rel="noreferrer">{detaliiAnunt.title}</a></h3>
+          <h1 className='mb-4 text-lg font-extrabold leading-none tracking-tight text-gray-900 hover:text-gray-600'><a href={detaliiAnunt.link} target='_blank' rel="noreferrer">{detaliiAnunt.title}</a></h1>
           <div>
             <p>{detaliiAnunt.locationAndDate}</p>
             <p>{detaliiAnunt.yearAndKm}</p>

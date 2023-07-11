@@ -4,17 +4,9 @@ import Anunt from './components/Anunt/Anunt';
 import Header from './components/Header/Header';
 import favoritesJSON from './scrapedFavorites.json';
 import anunturiJSON from './scrapedAnunturi.json';
-import ReactPaginate from 'react-paginate';
 
 function App() {
-  const [anunturiArray, setAnunturi] = useState(favoritesJSON);
-  const [itemOffset, setItemOffset] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = anunturiArray.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(anunturiArray.length / itemsPerPage);
-
-  
+  const [anunturiArray, setAnunturi] = useState(favoritesJSON);  
 
   const sortBy = (arr, ascDesc, field) => {
     const sorted = arr.sort((a, b) => {
@@ -49,15 +41,6 @@ function App() {
     setAnunturi(sorted);
   }
 
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % anunturiArray.length;
-    setItemOffset(newOffset);
-  };
-
-  const handleChangeItemsPerPage = (event) => {
-    setItemsPerPage(event.target.value);
-  }
-
   return (
     <div className="App">
         <Header />
@@ -73,34 +56,12 @@ function App() {
           <div className='flex justify-center space-x-4 font-sans mt-4'>
             <button className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded' onClick={() => setAnunturi(favoritesJSON)}>Favorites</button>
             <button className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded' onClick={() => setAnunturi(anunturiJSON)}>Anunturi</button>
-            <select onChange={handleChangeItemsPerPage} value={itemsPerPage}>
-              <option>5</option>
-              <option>10</option>
-              <option>15</option>
-              <option>20</option>
-              <option>25</option>
-            </select>
           </div>
           <div className="flex justify-center flex-col space-y-8 mb-8 font-sans mt-8">
-            {currentItems.map((key, i) => (
+            {anunturiArray.map((key, i) => (
               <Anunt key={i} detaliiAnunt={key} />
             ))}
           </div>  
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-            className='inline-flex -space-x-px text-base h-10'
-            pageClassName='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-            previousClassName='flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-            nextClassName='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-            activeClassName='flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
-            breakClassName='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-            />
         </div>
     </div>
   );
