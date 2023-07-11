@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Anunt from './components/Anunt/Anunt';
 import Header from './components/Header/Header';
@@ -13,6 +13,8 @@ function App() {
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = anunturiArray.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(anunturiArray.length / itemsPerPage);
+
+  
 
   const sortBy = (arr, ascDesc, field) => {
     const sorted = arr.sort((a, b) => {
@@ -52,6 +54,10 @@ function App() {
     setItemOffset(newOffset);
   };
 
+  const handleChangeItemsPerPage = (event) => {
+    setItemsPerPage(event.target.value);
+  }
+
   return (
     <div className="App">
         <Header />
@@ -67,6 +73,13 @@ function App() {
           <div className='flex justify-center space-x-4 font-sans mt-4'>
             <button className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded' onClick={() => setAnunturi(favoritesJSON)}>Favorites</button>
             <button className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded' onClick={() => setAnunturi(anunturiJSON)}>Anunturi</button>
+            <select onChange={handleChangeItemsPerPage} value={itemsPerPage}>
+              <option>5</option>
+              <option>10</option>
+              <option>15</option>
+              <option>20</option>
+              <option>25</option>
+            </select>
           </div>
           <div className="flex justify-center flex-col space-y-8 mb-8 font-sans mt-8">
             {currentItems.map((key, i) => (
